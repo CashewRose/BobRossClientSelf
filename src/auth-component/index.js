@@ -5,7 +5,14 @@ class Auth extends Component {
 
   state = {
     username: "",
-    password: ""
+    password: "",
+    email: "",
+    last_name: "",
+    first_name: "",
+    street: "",
+    city: "",
+    state: "",
+    zip: ""
   }
 
   onChange(e) {
@@ -20,7 +27,7 @@ class Auth extends Component {
     console.log("register called")
     const user = Object.assign({}, this.state);
     console.log("user?", user)
-    return fetch("http://127.0.0.1:8080/register/", {
+    return fetch("http://127.0.0.1:8000/register/", {
       method: 'POST',
       body: JSON.stringify(user),
       headers: {
@@ -38,7 +45,14 @@ class Auth extends Component {
         user: this.state.username,
         token: responseToken.token,
         username: "",
-        password: ""
+        password: "",
+        email: "",
+        last_name: "",
+        first_name: "",
+        street: "",
+        city: "",
+        state: "",
+        zip: ""
       })
     })
     .catch((err) => {
@@ -47,21 +61,70 @@ class Auth extends Component {
   }
 
   render() {
-    const { username, password } = this.state
+    const { username, password, email, last_name, first_name, street, city, state, zip} = this.state
     return (
       <div>
         <input
           type="text"
           name="username"
-          placeholder="username"
+          placeholder="Username"
           value={username}
           onChange={e => this.onChange(e)}
         />
         <input
           type="password"
-          placeholder="password"
+          placeholder="Password"
           name="password"
           value={password}
+          onChange={e => this.onChange(e)}
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          name="email"
+          value={email}
+          onChange={e => this.onChange(e)}
+        />
+        <input
+          type="text"
+          placeholder="First Name"
+          name="first_name"
+          value={first_name}
+          onChange={e => this.onChange(e)}
+        />
+        <input
+          type="text"
+          placeholder="Last Name"
+          name="last_name"
+          value={last_name}
+          onChange={e => this.onChange(e)}
+        />
+        <input
+          type="text"
+          placeholder="Address"
+          name="street"
+          value={street}
+          onChange={e => this.onChange(e)}
+        />
+        <input
+          type="text"
+          placeholder="City"
+          name="city"
+          value={city}
+          onChange={e => this.onChange(e)}
+        />
+        <input
+          type="text"
+          placeholder="State"
+          name="state"
+          value={state}
+          onChange={e => this.onChange(e)}
+        />
+        <input
+          type="text"
+          placeholder="Zipcode"
+          name="zip"
+          value={zip}
           onChange={e => this.onChange(e)}
         />
         <button onClick = {() => this.register()}>Submit</button>
